@@ -1,0 +1,32 @@
+<h1>Estas são nossas Tags Listas</h1>
+
+<p>Minha lista Não Ordenada Statica</p>
+
+<ul>
+  <li>Nossa Linha 1</li>
+  <li>Nossa Linha 2</li>
+</ul>
+
+<p>Minha Lista Ordenada Statica</p>
+<ol>
+  <li>Nossa Linha</li>
+  <li>Nossa Linha</li>
+  <li>Nossa Linha</li>
+</ol>
+
+<p><strong>Minha Lista Não Ordenada Dinâmica</strong></p>
+<ul>
+  @for (item of this.minhaLista; track $index) {
+    <!-- Interpolação no Angular é chamado de propertyBind  {{ }}  -->
+    <li>{{ 'Minha Lista: ' + item.toLocaleUpperCase() }}</li>
+  }
+</ul>
+
+<p><strong>Minha Lista Ordenada Dinâmica</strong></p>
+<ol>
+  <!-- Interpolação no Angular é chamado de propertyBind  {{ }}  -->
+  @for (data of this.minhaListaJS; track $index) {
+    <!-- Por causa do ANY não tenho acesso so metodos herdados do JS -->
+    <li>{{ data + 'Minha Lista' }}</li>
+  }
+</ol>
