@@ -1,0 +1,16 @@
+.pai {
+  /* vou start o container Flex */
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.filha {
+  background-color: aqua;
+  flex: 1; /* cada filha cresce igualmente */
+  border: 1px solid red;
+}
