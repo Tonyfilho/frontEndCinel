@@ -1,0 +1,132 @@
+/* Estiliza o componente inteiro */
+:host {
+  display: block; /* Torna o componente um elemento de bloco (ocupa toda largura disponível) */
+  padding: 20px; /* Adiciona espaçamento interno de 20px em todos os lados */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define fonte moderna */
+}
+
+/* Estiliza o título principal */
+h1 {
+  text-align: center; /* Centraliza o texto horizontalmente */
+  color: #2c3e50; /* Cor azul escuro */
+  margin-bottom: 30px; /* Espaçamento inferior de 30px */
+  font-size: 28px; /* Tamanho da fonte */
+  font-weight: 600; /* Peso da fonte (semi-negrito) */
+}
+
+/* Container principal que usa Flexbox */
+.container-simples {
+  display: flex; /* ATIVA O FLEXBOX - torna este container um flex container */
+  justify-content: center; /* ALINHAMENTO HORIZONTAL: centraliza os itens filhos na horizontal */
+  align-items: center; /* ALINHAMENTO VERTICAL: centraliza os itens filhos na vertical */
+  flex-direction: column; /* DIREÇÃO: organiza os itens em coluna (um abaixo do outro) */
+  gap: 20px; /* ESPAÇAMENTO: adiciona 20px de espaço entre os itens filhos */
+  min-height: 400px; /* Altura mínima de 400px */
+  background-color: #f8f9fa; /* Cor de fundo cinza muito claro */
+  border-radius: 10px; /* Bordas arredondadas */
+  padding: 20px; /* Espaçamento interno */
+  margin: 0 auto; /* Margem automática nas laterais (centraliza o container) */
+  max-width: 1200px; /* Largura máxima do container */
+}
+
+/* Estiliza a tabela */
+table {
+  width: 100%; /* Ocupa 100% da largura do container pai */
+  max-width: 900px; /* Largura máxima de 900px */
+  background-color: white; /* Fundo branco */
+  border-collapse: collapse; /* Remove espaços entre as bordas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 8px; /* Bordas arredondadas */
+  overflow: hidden; /* Esconde conteúdo que ultrapassa as bordas arredondadas */
+}
+
+/* Estiliza células do cabeçalho e células normais */
+th, td {
+  padding: 15px 20px; /* Espaçamento interno: 15px em cima/baixo, 20px nas laterais */
+  text-align: left; /* Alinhamento do texto à esquerda */
+  border-bottom: 1px solid #e0e0e0; /* Borda inferior cinza clara */
+}
+
+/* Estiliza apenas as células do cabeçalho (th) */
+th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente roxo/azul */
+  color: white; /* Texto branco */
+  font-weight: 600; /* Texto semi-negrito */
+  font-size: 16px; /* Tamanho da fonte */
+  letter-spacing: 0.5px; /* Espaçamento entre letras */
+}
+
+/* Estiliza as células normais (td) */
+td {
+  color: #333; /* Cor do texto cinza escuro */
+  font-size: 14px; /* Tamanho da fonte */
+}
+
+/* Efeito hover nas linhas da tabela */
+tr:hover {
+  background-color: #f5f5f5; /* Muda cor de fundo quando mouse passa por cima */
+  transition: background-color 0.3s ease; /* Transição suave de 0.3 segundos */
+}
+
+/* Estiliza a última linha da tabela (remove a borda inferior) */
+tr:last-child td {
+  border-bottom: none; /* Remove a borda inferior da última linha */
+}
+
+/* Estiliza especificamente a coluna do Nome */
+td:first-child {
+  font-weight: 600; /* Texto em negrito */
+  color: #667eea; /* Cor roxa/azul */
+}
+
+/* Estiliza especificamente a coluna do Email */
+td:nth-child(2) {
+  color: #764ba2; /* Cor roxa */
+  font-style: italic; /* Texto em itálico */
+}
+
+/* Estiliza especificamente a coluna do Telefone */
+td:last-child {
+  font-family: monospace; /* Fonte monoespaçada (boa para números) */
+  font-weight: 500; /* Peso médio */
+  letter-spacing: 0.5px; /* Espaçamento entre letras */
+}
+
+/* Responsividade para tablets */
+@media (max-width: 768px) {
+  .container-simples {
+    padding: 15px; /* Reduz padding */
+    min-height: 300px; /* Reduz altura mínima */
+  }
+  
+  th, td {
+    padding: 10px 15px; /* Reduz espaçamento das células */
+    font-size: 13px; /* Reduz tamanho da fonte */
+  }
+  
+  h1 {
+    font-size: 24px; /* Reduz tamanho do título */
+  }
+}
+
+/* Responsividade para celulares */
+@media (max-width: 600px) {
+  table {
+    font-size: 12px; /* Fonte ainda menor */
+  }
+  
+  th, td {
+    padding: 8px 10px; /* Espaçamento mínimo */
+    display: table-cell; /* Mantém o comportamento de tabela */
+  }
+  
+  /* Permite rolagem horizontal da tabela em telas muito pequenas */
+  .container-simples {
+    overflow-x: auto; /* Adiciona scroll horizontal */
+    display: block; /* Muda de flex para block para permitir scroll */
+  }
+  
+  table {
+    min-width: 500px; /* Largura mínima para garantir que o conteúdo apareça bem */
+  }
+}
