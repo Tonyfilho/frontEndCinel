@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './avatar.css',
 })
 export class Avatar {
-  nome: string = 'Tony';
-  //  nome2:string = `20`;
-  //  nome3:string = 'true';
+  localNome: string = 'Tony';
+  localImage!:string;
+
 
   logout() {
     // throw new Error('Method not implemented.');
