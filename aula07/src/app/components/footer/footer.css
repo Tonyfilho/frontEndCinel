@@ -1,0 +1,46 @@
+.footer {
+  width: 100%;
+  min-height: 15vh;
+  background: linear-gradient(68.15deg, #222 14.62%, #050c1b 85.61%);
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+  text-align: center;
+  /* position: fixed; */
+}
+
+.links a {
+  margin: 0 10px;
+  color: aliceblue;
+}
+.links a:hover {
+  color: rgb(112, 131, 148);
+}
+
+p {
+  padding: 0.5%;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    height: auto;
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .links a {
+    margin: 0;
+  }
+}
