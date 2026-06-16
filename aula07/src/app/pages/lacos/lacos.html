@@ -1,1 +1,7 @@
-<p>lacos works!</p>
+<div class="center">
+  <p>lacos works!</p>
+  @for (item of this.minhaCores; track $index) {
+    <!-- <span>item</span> -->
+    <span>{{ item }} {{ $index }} </span>
+  }
+</div>

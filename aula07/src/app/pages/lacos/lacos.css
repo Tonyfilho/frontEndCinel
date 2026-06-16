@@ -1,0 +1,19 @@
+.center {
+  display: flex;
+  width: 100%;
+  min-height: 60vh;
+  margin: 5%;
+  align-content: stretch;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+p {
+  margin: 2%;
+}
+
+span {
+  margin: 2%;
+}
