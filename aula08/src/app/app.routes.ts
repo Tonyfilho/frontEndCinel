@@ -1,4 +1,3 @@
-import { Fuctions } from './pages/fuctions/fuctions';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
