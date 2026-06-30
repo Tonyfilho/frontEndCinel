@@ -14,13 +14,15 @@ export const routes: Routes = [
   },
   {
     path: 'ebook/poo',
-    loadComponent: () =>
-      import('./pages/poo/poo').then((c) => c.Poo),
+    loadComponent: () => import('./pages/poo/poo').then((c) => c.Poo),
   },
   {
     path: 'ebook/fuctions',
-    loadComponent: () =>
-      import('./pages/fuctions/fuctions').then((c) => c.Fuctions),
+    loadComponent: () => import('./pages/fuctions/fuctions').then((c) => { return c.Fuctions}),
+  },
+  {
+    path: 'ebook/typescript',
+    loadComponent: () => import('./pages/typescript/typescript').then((c) => { return c.Typescript}),
   },
 
   {
