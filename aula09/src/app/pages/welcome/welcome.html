@@ -1,0 +1,43 @@
+<div class="welcome-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Formulários e Dados Assíncronos com Angular</h1>
+
+      <p class="hero-description">
+        Aprenda a construir formulários reativos e gerenciar dados assíncronos usando Observables,
+        Promises e as melhores práticas do Angular.
+      </p>
+
+      <button class="btn-primary" (click)="onGetStarted()">Começar Agora</button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2>Recursos Principais</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        @for (feature of features; track $index) {
+          <div class="feature-icon">{{ feature.icon }}</div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="tech-section">
+    <h2>Tecnologias</h2>
+
+    <div class="tech-grid">
+      <div class="tech-item">
+        @for (tech of techStack; track $index) {
+          {{ tech }}
+        }
+      </div>
+    </div>
+  </section>
+</div>
