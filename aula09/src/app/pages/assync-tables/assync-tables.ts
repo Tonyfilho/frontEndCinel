@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { IUtilizador } from '../../shared/i-utilizador';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -17,19 +17,22 @@ export class AssyncTables {
   localUserPromise: IUtilizador[] = [];
 
   ///utilizador com async await
-  localUserAsyncPromise: IUtilizador[] = [];
+  // localUserAsyncPromise: IUtilizador[] = [];
 
   ///utilizador com Observable
-  localUserObservable$: Observable<IUtilizador[]>;
+  // localUserObservable$: Observable<IUtilizador[]>;
 
   /// criação das variaveis de error
   errorPromise: LocalError = { errorAsync: false, errorNome: '' };
-  errorAsyncAwaitPromise: LocalError = { errorAsync: false, errorNome: '' };
-  errorObservable: LocalError = { errorAsync: false, errorNome: '' };
+  //  errorAsyncAwaitPromise: LocalError = { errorAsync: false, errorNome: '' };
+  //  errorObservable: LocalError = { errorAsync: false, errorNome: '' };
 
   ///falaremos sobre DI ou Injeção de Depedência
-  constructor(protected fakeBack: FakeBack) {
-    this.localUserObservable$ = fakeBack.getUtilizadoresObservable();
+  constructor(
+    protected fakeBack: FakeBack,
+    private cdr: ChangeDetectorRef,
+  ) {
+    //  this.localUserObservable$ = fakeBack.getUtilizadoresObservable();
 
     ///invocando o metodo de promise
     this.carregarPromise();
@@ -38,19 +41,22 @@ export class AssyncTables {
   carregarPromise = () => {
     this.fakeBack
       .getUtilizadorsPromise()
-      .then((res: IUtilizador[]) => {
-        console.log('Nosso Result: ', res);
-        return (this.localUserAsyncPromise = res);
+      .then((result: IUtilizador[]) => {
+        this.localUserPromise = result;
+        // console.log('Nosso Result: ', this.localUserPromise);
+        this.cdr.detectChanges();
+        return this.localUserPromise;
       })
       .catch((e) => {
-        console.error('Nosso Error: ', e);
-        this.errorPromise = {errorAsync: true, errorNome: "Error no carregarPromise(): "+ e};
+       // console.error('Nosso Error: ', e);
+        this.errorPromise = { errorAsync: true, errorNome: 'Error no carregarPromise(): ' + e };
+        this.localUserPromise = [];
       });
-  };
-
-  carregarAsyncAwaitPromise() {
-    
   }
 
-  carregarObservable = () => {};
+  // carregarAsyncAwaitPromise() {
+
+  // }
+
+  //  carregarObservable = () => {};
 } /// endclass

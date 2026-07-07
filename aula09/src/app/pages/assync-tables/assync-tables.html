@@ -1,1 +1,53 @@
-<p>assync-tables works!</p>
+<div class="container">
+  <h1>Aula de Tabelas Dinâmicas</h1>
+  <!-- Tabela Promise -->
+  <section class="card">
+    <div class="topo">
+      <h2>Promise -Then / Catch</h2>
+      <button (click)="this.carregarPromise()">Carregar Dados</button>
+    </div>
+
+    <!-- Criando um IF -->
+     @if(errorPromise.errorAsync) {
+        <table>
+            <tbody>
+                <tr>
+                    <td class="sem-dados">No Data + {{ this.errorPromise.errorNome }}</td>
+                </tr>
+            </tbody>
+        </table>
+     } @else {
+       <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Idade</th>
+                <th>Ativo</th>
+                <th>Salario</th>
+                <th>Data de Registro</th>
+                <th>Departamento</th>           
+ 
+            </tr>
+        </thead>
+         <tbody>
+         
+          @for (item of localUserPromise; track $index ) {
+           
+             <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.idade}}</td>
+                <td>{{item.ativo}}</td>
+                <td>{{item.salario}}</td>
+                <td>{{item.dataRegistro | date }}</td>
+                <td>{{item.departamento}}</td>
+             </tr>
+          } <!-- fim do for -->
+         </tbody>
+       </table>
+     } <!-- fim else -->
+
+  </section>
+  <!-- fim da tabela -->
+</div>
