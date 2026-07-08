@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { IUtilizador } from '../../shared/i-utilizador';
-import { Observable } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of, switchMap, take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FakeBack } from '../../service/fake-back';
 
@@ -22,6 +22,8 @@ export class AssyncTables {
   ///utilizador com Observable
   localUserObservable$: Observable<IUtilizador[]>;
 
+  localUserSubscrition: IUtilizador[] = [];
+
   /// criação das variaveis de error
   errorPromise: LocalError = { errorAsync: false, errorNome: '' };
   errorAsyncAwaitPromise: LocalError = { errorAsync: false, errorNome: '' };
@@ -32,13 +34,19 @@ export class AssyncTables {
     protected fakeBack: FakeBack,
     private cdr: ChangeDetectorRef,
   ) {
-      this.localUserObservable$ = fakeBack.getUtilizadoresObservable();
+    this.localUserObservable$ = fakeBack.getUtilizadoresObservable();
 
     ///invocando o metodo de promise
     this.carregarPromise();
 
     ///invocando o 2º metodo de promise
     this.carregarAsyncAwaitPromise();
+
+    ///invocando o metodo de Observable
+    this.carregarObservable();
+
+  //  this.cdr.detectChanges();
+
   }
 
   carregarPromise = () => {
@@ -47,7 +55,7 @@ export class AssyncTables {
       .then((result: IUtilizador[]) => {
         this.localUserPromise = result;
         // console.log('Nosso Result: ', this.localUserPromise);
-        this.cdr.detectChanges();
+      //  this.cdr.detectChanges();
         return this.localUserPromise;
       })
       .catch((e) => {
@@ -64,11 +72,11 @@ export class AssyncTables {
     this.fakeBack
       .getUtlizadoresAsync()
       .then((res: IUtilizador[]) => {
-        console.log('Nosso Result em carregarAsyncAwaitPromise(): ', res);
+      //  console.log('Nosso Result em carregarAsyncAwaitPromise(): ', res);
         this.localUserAsyncPromise = res;
       })
       .catch((error) => {
-        console.error('Nosso Error em carregarAsyncAwaitPromise(): ', error);
+     //   console.error('Nosso Error em carregarAsyncAwaitPromise(): ', error);
         this.localUserAsyncPromise = [];
         this.errorAsyncAwaitPromise = {
           errorAsync: true,
@@ -77,5 +85,42 @@ export class AssyncTables {
       });
   }
 
-  //  carregarObservable = () => {};
+  carregarObservable = () => {
+    ///falar um pouco sobre RxJS
+    ///operador take(1), este cara faz com que apos 1 subscrição o canal de dados seja fechado
+    this.fakeBack.getUtilizadoresObservable().pipe(
+      take(1),
+      switchMap((res: IUtilizador[]) => {
+        console.log('Nosso Result em carregarObservable(): ', res);
+        this.localUserSubscrition = res;
+        this.cdr.detectChanges();
+        return this.localUserSubscrition;
+      }),
+      catchError((error) => {
+        console.error('Nosso Error em carregarObservable(): ', error);
+        this.errorObservable = {errorAsync: true, errorNome: "Erro no metodo carregarObservable:  " + error };
+        return of([]);
+      }),
+    ).subscribe();
+  };
+  carregarObservableComSubscribleObjeto() {
+    ///falar um pouco sobre RxJS
+    ///operador take(1), este cara faz com que apos 1 subscrição o canal de dados seja fechado
+    this.fakeBack.getUtilizadoresObservable().pipe(
+      take(1),
+      // switchMap((res: IUtilizador[]) => {
+      //   console.log('carregarObservableComSubscribleObjeto(): ', res);
+      //  return res;
+      //   }),  
+       mergeMap((res: IUtilizador[]) => {
+        console.log('carregarObservableComSubscribleObjeto(): ', res);
+        return res;
+      }), 
+         
+    ).subscribe({
+      next: (result: IUtilizador) => { console.log("nosso dados: ", result) },
+      error: (e) => console.log("nosso Erro no metodo carregarObservableComSubscribleObjeto()" + e),
+      complete: () => console.log("nosso complete, terminou o Observable"),
+    });
+  };
 } /// endclass
