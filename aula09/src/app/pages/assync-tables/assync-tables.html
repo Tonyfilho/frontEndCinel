@@ -8,46 +8,142 @@
     </div>
 
     <!-- Criando um IF -->
-     @if(errorPromise.errorAsync) {
-        <table>
-            <tbody>
-                <tr>
-                    <td class="sem-dados">No Data + {{ this.errorPromise.errorNome }}</td>
-                </tr>
-            </tbody>
-        </table>
-     } @else {
-       <table>
+    @if (errorPromise.errorAsync) {
+      <table>
+        <tbody>
+          <tr>
+            <td class="sem-dados">No Data + {{ this.errorPromise.errorNome }}</td>
+          </tr>
+        </tbody>
+      </table>
+    } @else {
+      <table>
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Idade</th>
-                <th>Ativo</th>
-                <th>Salario</th>
-                <th>Data de Registro</th>
-                <th>Departamento</th>           
- 
-            </tr>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Idade</th>
+            <th>Ativo</th>
+            <th>Salario</th>
+            <th>Data de Registro</th>
+            <th>Departamento</th>
+          </tr>
         </thead>
-         <tbody>
-         
-          @for (item of localUserPromise; track $index ) {
-           
-             <tr>
-                <td>{{item.id}}</td>
-                <td>{{item.email}}</td>
-                <td>{{item.idade}}</td>
-                <td>{{item.ativo}}</td>
-                <td>{{item.salario}}</td>
-                <td>{{item.dataRegistro | date }}</td>
-                <td>{{item.departamento}}</td>
-             </tr>
-          } <!-- fim do for -->
-         </tbody>
-       </table>
-     } <!-- fim else -->
+        <tbody>
+          @for (item of localUserPromise; track $index) {
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.idade }}</td>
+              <td>{{ item.ativo }}</td>
+              <td>{{ item.salario }}</td>
+              <td>{{ item.dataRegistro | date }}</td>
+              <td>{{ item.departamento }}</td>
+            </tr>
+          }
+          <!-- fim do for -->
+        </tbody>
+      </table>
+    }
+    <!-- fim else -->
+  </section>
 
+  <!-- Nossa 2ª tabela de Promise -->
+  <section class="card">
+    <div class="topo">
+      <h2>Promise -Async & Await</h2>
+      <button (click)="carregarAsyncAwaitPromise()">Carregar Dados</button>
+    </div>
+
+    <!-- Criando um IF -->
+    @if (errorAsyncAwaitPromise.errorAsync) {
+      <table>
+        <tbody>
+          <tr>
+            <td class="sem-dados">No Data + {{ this.errorAsyncAwaitPromise.errorNome }}</td>
+          </tr>
+        </tbody>
+      </table>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Idade</th>
+            <th>Ativo</th>
+            <th>Salario</th>            
+            <th>Data de Registro</th>
+            <th>Departamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of localUserAsyncPromise; track item.id) {
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.idade }}</td>
+              <td>{{ item.ativo }}</td>
+              <td>{{ item.salario }}</td>
+              <td>{{ item.dataRegistro | date }}</td>
+              <td>{{ item.departamento }}</td>
+            </tr>
+          }
+          <!-- fim do for -->
+        </tbody>
+      </table>
+    }
+    <!-- fim else -->
   </section>
   <!-- fim da tabela -->
+
+  <section class="card">
+    <div class="topo">
+      <h2>Observable + PipeAsync</h2>
+      <button>Carregar Dados</button>
+    </div>
+
+    @if (this.localUserObservable$ | async; as utilizadores) {
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Idade</th>
+            <th>Ativo</th>
+            <th>Salario</th>
+            <th>Data de Registro</th>
+            <th>Departamento</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (item of utilizadores; track item.id) {
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.idade }}</td>
+              <td>{{ item.ativo }}</td>
+              <td>{{ item.salario }}</td>
+              <td>{{ item.dataRegistro | date }}</td>
+              <td>{{ item.departamento }}</td>
+            </tr>
+          }
+          <!-- fim do for -->
+        </tbody>
+      </table>
+
+      
+    }
+    <!-- fim do if -->
+    @else {
+      <table>
+        <tbody>
+          <tr>
+            <td class="sem-dados">No Data + {{ this.errorObservable.errorNome }}</td>
+          </tr>
+        </tbody>
+      </table>
+    }
+  </section>
 </div>

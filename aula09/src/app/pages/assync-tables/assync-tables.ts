@@ -17,25 +17,28 @@ export class AssyncTables {
   localUserPromise: IUtilizador[] = [];
 
   ///utilizador com async await
-  // localUserAsyncPromise: IUtilizador[] = [];
+  localUserAsyncPromise: IUtilizador[] = [];
 
   ///utilizador com Observable
-  // localUserObservable$: Observable<IUtilizador[]>;
+  localUserObservable$: Observable<IUtilizador[]>;
 
   /// criação das variaveis de error
   errorPromise: LocalError = { errorAsync: false, errorNome: '' };
-  //  errorAsyncAwaitPromise: LocalError = { errorAsync: false, errorNome: '' };
-  //  errorObservable: LocalError = { errorAsync: false, errorNome: '' };
+  errorAsyncAwaitPromise: LocalError = { errorAsync: false, errorNome: '' };
+  errorObservable: LocalError = { errorAsync: false, errorNome: '' };
 
   ///falaremos sobre DI ou Injeção de Depedência
   constructor(
     protected fakeBack: FakeBack,
     private cdr: ChangeDetectorRef,
   ) {
-    //  this.localUserObservable$ = fakeBack.getUtilizadoresObservable();
+      this.localUserObservable$ = fakeBack.getUtilizadoresObservable();
 
     ///invocando o metodo de promise
     this.carregarPromise();
+
+    ///invocando o 2º metodo de promise
+    this.carregarAsyncAwaitPromise();
   }
 
   carregarPromise = () => {
@@ -48,15 +51,31 @@ export class AssyncTables {
         return this.localUserPromise;
       })
       .catch((e) => {
-       // console.error('Nosso Error: ', e);
+        // console.error('Nosso Error: ', e);
         this.errorPromise = { errorAsync: true, errorNome: 'Error no carregarPromise(): ' + e };
         this.localUserPromise = [];
       });
+  };
+
+  /**
+   * ASYNC & AWAIT
+   */
+  carregarAsyncAwaitPromise() {
+    this.fakeBack
+      .getUtlizadoresAsync()
+      .then((res: IUtilizador[]) => {
+        console.log('Nosso Result em carregarAsyncAwaitPromise(): ', res);
+        this.localUserAsyncPromise = res;
+      })
+      .catch((error) => {
+        console.error('Nosso Error em carregarAsyncAwaitPromise(): ', error);
+        this.localUserAsyncPromise = [];
+        this.errorAsyncAwaitPromise = {
+          errorAsync: true,
+          errorNome: 'Error no carregarAsyncAwaitPromise(): ' + error,
+        };
+      });
   }
-
-  // carregarAsyncAwaitPromise() {
-
-  // }
 
   //  carregarObservable = () => {};
 } /// endclass
