@@ -106,19 +106,25 @@ export class AssyncTables {
   carregarObservableComSubscribleObjeto() {
     ///falar um pouco sobre RxJS
     ///operador take(1), este cara faz com que apos 1 subscrição o canal de dados seja fechado
+    let localArrayIUser: IUtilizador[] = [];
+    let localArrayIUser2: IUtilizador[] = [];
     this.fakeBack.getUtilizadoresObservable().pipe(
       take(1),
-      // switchMap((res: IUtilizador[]) => {
-      //   console.log('carregarObservableComSubscribleObjeto(): ', res);
-      //  return res;
-      //   }),  
-       mergeMap((res: IUtilizador[]) => {
+      switchMap((res: IUtilizador[]) => {
         console.log('carregarObservableComSubscribleObjeto(): ', res);
+        localArrayIUser2 = res;
         return res;
-      }), 
-         
-    ).subscribe({
-      next: (result: IUtilizador) => { console.log("nosso dados: ", result) },
+      }),  
+      //  mergeMap((res: IUtilizador[]) => {
+        //   console.log('carregarObservableComSubscribleObjeto(): ', res);
+        //   return res;
+        // }), 
+        
+      ).subscribe({
+        next: (result: IUtilizador) => { console.log("nosso dados: ", result),
+          localArrayIUser.push(result);
+
+       },
       error: (e) => console.log("nosso Erro no metodo carregarObservableComSubscribleObjeto()" + e),
       complete: () => console.log("nosso complete, terminou o Observable"),
     });
