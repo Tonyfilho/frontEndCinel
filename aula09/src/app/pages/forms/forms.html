@@ -1,1 +1,102 @@
-<p>forms works!</p>
+<div class="login-card">
+  <h2>SignIn</h2>
+  <p>Favor SingIn o Forms</p>
+
+  <button class="clean-button" (click)="this.signInForms.reset()">Reset Formulário</button>
+
+  <!-- criação do formulario -->
+  <form [formGroup]="this.signInForms" (ngSubmit)="onSubmit()">
+    <!-- 1º campo do forms -->
+    <label for="email">E-mail</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Digite seu Email"
+      formControlName="email"
+    />
+    <!-- inicio das validações -->
+    @if (this.signInForms.invalid && this.signInForms.get('email')?.touched) {
+      <!-- NgClass é uma das diretivas, ela cuida de injetar uma classe de CSS no template caso haja uma booleano true -->
+      <div
+        [ngClass]="{
+          'error-message':
+            this.signInForms.controls['email'].invalid && this.signInForms.get('email')?.touched,
+        }"
+      >
+        @if (this.signInForms.hasError('required', 'email')) {
+          <small class="warning">
+            <p>{{ ' E-mail é obrigatório' }}</p>
+          </small>
+        }
+        @if (this.signInForms.get('email')?.getError('email')) {
+          <small class="warning">
+            {{ 'Email não valido' }}
+          </small>
+        }
+      </div>
+    }
+    <!-- 2º campo do forms -->
+
+    <label for="password">Password</label>
+    <input
+      type="password"
+      ,
+      name="password"
+      ,
+      id="password"
+      formControlName="password"
+      placeholder="Digite seu password mínimo de 6 máximo de 10"
+    />
+
+    @if (this.signInForms.invalid && this.signInForms.get('password')?.touched) {
+      <div
+        [ngClass]="{
+          'error-message':
+            this.signInForms.controls['password'].invalid &&
+            this.signInForms.get('password')?.touched,
+        }"
+      >
+        @if (this.signInForms.hasError('required', 'password')) {
+          <small class="warning">
+            <p>
+              {{ ' Password é Obrigatória' }}
+            </p>
+          </small>
+        }
+        @if (this.signInForms.get('password')?.getError('minlength')) {
+          <small class="warning">
+            <p>
+              {{ ' Password com no mínimo 6 caracteres ' }}
+            </p>
+          </small>
+        }
+
+        @if (this.signInForms.hasError( 'maxlength', 'password')) {
+          <small class="warning">
+            <p>
+              {{ ' Password com no máximo 10 caracteres ' }}
+            </p>
+          </small>
+        }
+      </div>
+    }
+    <!-- {{ this.signInForms.get('password')?.getError('minlength') }} -->
+
+    <!-- nosso botões -->
+
+    <div class="button-group">
+      <!-- o type aqui define o comportamento do botão no formulário -->
+      <button type="button" class="go-back" (click)="goBack()">Go Back</button>
+      <!-- o type de submit faz com que a tag form execute o formulario, mas faz com que        
+      o metodo (ngSubmit)="onSubmit() receba o nosso form  -->
+      <button
+        class="sign-in"
+        type="submit"
+        [disabled]="this.signInForms.invalid && this.signInForms.touched"
+      >
+        SignIn
+      </button>
+    </div>
+  </form>
+</div>

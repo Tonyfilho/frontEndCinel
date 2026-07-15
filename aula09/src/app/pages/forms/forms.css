@@ -1,0 +1,196 @@
+/* Estilos para o cartão de login */
+.login-card {
+  width: 550px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--background-color-sections);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  color: var(--text-color);
+}
+ 
+.login-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+ 
+.login-card h2 {
+  margin-top: 0;
+  color: var(--text-color-h3);
+  font-size: var(--main-font-size2);
+  text-align: center;
+}
+ 
+.login-card p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+ 
+/* Estilos para o formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+ 
+label {
+  font-weight: bold;
+  margin-bottom: -0.5rem;
+  color: var(--text-color);
+}
+ 
+input {
+  padding: 0.8rem;
+  border: 1px solid var(--placeholder);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+ 
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--text-color-focus);
+}
+ 
+/* Estilos para botões */
+button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+ 
+.clean-button {
+  background-color: var(--secondary-color);
+  color: var(--text-color-light);
+  margin-bottom: 1rem;
+}
+ 
+.clean-button:hover {
+  background-color: var(--third-color);
+}
+ 
+/* Grupo de botões */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+ 
+.button-group button {
+  flex: 1;
+}
+ 
+.sign-in {
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
+}
+ 
+.sign-in:hover {
+  background-color: var(--text-hover2);
+}
+ 
+.sign-in:disabled {
+  background-color: var(--placeholder);
+  cursor: not-allowed;
+}
+ 
+.go-back {
+  background-color: var(--background-color-sections2);
+  color: var(--text-color);
+}
+ 
+.go-back:hover {
+  background-color: var(--placeholder);
+}
+ 
+.google-btn {
+  background-color: var(--text-color-light);
+  color: var(--background-color-code);
+  border: 1px solid var(--color-button-google);
+}
+ 
+.google-btn:hover {
+  background-color: var(--color-button-google-hover);
+}
+ 
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+ 
+.error-message {
+  margin-top: -0.5rem;
+  width: 98%;
+  color: var(--secondary-color);
+  background-color: var(--background-color-error);
+  padding: 0.3rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  border-left: 3px, solid var(--secondary-color);
+ 
+}
+ 
+.error-message::before {
+  /* content: "⚠"; */
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+ 
+.warning {
+  color: var(--text-color);
+  padding: 0.1%;
+  font-size: 10px;
+}
+ 
+@media (max-width: 768px) {
+  .login-card {
+    width: 95%;
+    padding: 1.5rem;
+  }
+ 
+  .button-group {
+    flex-direction: column;
+  }
+ 
+  .clean-button,
+  .google-btn,
+  .sign-in,
+  .go-back {
+    width: 100%;
+  }
+ 
+  input {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+ 
+  .login-card h2 {
+    font-size: 1.5rem;
+  }
+ 
+  .login-card p {
+    font-size: 0.95rem;
+  }
+ 
+  button {
+    font-size: 0.95rem;
+  }
+ 
+  .error-message {
+    font-size: 0.85rem;
+  }
+ 
+  .warning p {
+    font-size: 0.8rem;
+  }
+}
+ 
