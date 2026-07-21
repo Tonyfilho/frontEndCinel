@@ -1,0 +1,104 @@
+@if (!isLoading) {
+  <div class="about-container">
+    <div class="about-header">
+      <h1>Sobre o Projeto</h1>
+      <p class="subtitle">Formação Frontend - Angular 21</p>
+    </div>
+
+    <div class="about-content">
+      <!-- Card do Usuário -->
+      @if (user$ | async; as user) {
+        <div class="user-card">
+          <div class="user-avatar" [style.background-image]="'url(' + (user.photoURL || '') + ')'">
+            @if (!user.photoURL) {
+              <span class="avatar-placeholder">
+                {{ getInitials(user) }}
+              </span>
+            }
+          </div>
+          <div class="user-info">
+            <h2>{{ user.displayName || 'Usuário' }}</h2>
+            <p class="user-email">{{ user.email }}</p>
+            <span class="user-status" [class.authenticated]="user">
+              <span class="status-dot"></span>
+              Autenticado
+            </span>
+          </div>
+        </div>
+      }
+
+      <!-- Informações do Projeto -->
+      <div class="project-info">
+        <h3>📚 Tecnologias Utilizadas</h3>
+        <div class="tech-grid">
+          <div class="tech-item">
+            <span class="tech-icon">⚡</span>
+            <span>Angular 21</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-icon">🔥</span>
+            <span>Firebase Hosting</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-icon">🔐</span>
+            <span>Firebase Authentication</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-icon">📘</span>
+            <span>TypeScript</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-icon">🎨</span>
+            <span>Angular Material</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-icon">📦</span>
+            <span>RxJS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funcionalidades -->
+      <div class="features">
+        <h3>✨ Funcionalidades do Projeto</h3>
+        <ul class="feature-list">
+          <li>
+            <span class="feature-badge">✓</span>
+            <span>Criação de Componentes reutilizáveis</span>
+          </li>
+          <li>
+            <span class="feature-badge">✓</span>
+            <span>Services para gerenciamento de estado</span>
+          </li>
+          <li>
+            <span class="feature-badge">✓</span>
+            <span>Interfaces TypeScript para tipagem segura</span>
+          </li>
+          <li>
+            <span class="feature-badge">✓</span>
+            <span>Autenticação com Firebase</span>
+          </li>
+          <li>
+            <span class="feature-badge">✓</span>
+            <span>Deploy no Firebase Hosting</span>
+          </li>
+          <li>
+            <span class="feature-badge">✓</span>
+            <span>Observables com RxJS</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Footer -->
+      <div class="about-footer">
+        <p>&copy; {{ currentYear }} - Formação Frontend</p>
+        <p class="version">Versão 1.0.0</p>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando informações...</p>
+  </div>
+}

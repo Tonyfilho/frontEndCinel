@@ -12,14 +12,20 @@ import { AuthStateService } from './service/auth-state';
   styleUrl: './app.css',
 })
 export class App implements OnInit {
-  constructor(private authStateService: AuthStateService) {}
-
+  constructor(private authstateService: AuthStateService) {}
   ngOnInit(): void {
-    this.authStateService.initAuthListener();
-
-    /**Forma de testar se temos dados */
-    this.authStateService.getUser().subscribe((user) => {
-      console.log('dados do google Auth: ', user);
+    this.authstateService.initAuthListener();
+    /**Forma de teste de dados */
+    this.authstateService.getUser().subscribe({
+      next: (result) => {
+        console.log('Nosso Resulto do Google no App.ts: ', result);
+      },
+      error: (error) => {
+        console.error('Nosso Error no Auth gdo Firebase no App.ts:', error);
+      },
+      complete: () => {
+        console.log('Observable Finalizado no App.ts.');
+      },
     });
   }
 }
