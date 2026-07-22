@@ -2,7 +2,7 @@
   <h2>SignIn</h2>
   <p>Favor SingIn o Forms</p>
 
-  <button class="clean-button" (click)="this.signInForms.reset()">Reset Formulário</button>
+  <button class="clean-button"  >Reset Formulário</button>
 
   <!-- criação do formulario -->
   <form [formGroup]="this.signInForms" (ngSubmit)="onSubmit()">
@@ -72,7 +72,7 @@
           </small>
         }
 
-        @if (this.signInForms.hasError( 'maxlength', 'password')) {
+        @if (this.signInForms.hasError('maxlength', 'password')) {
           <small class="warning">
             <p>
               {{ ' Password com no máximo 10 caracteres ' }}
@@ -98,12 +98,15 @@
         SignIn
       </button>
     </div>
-   <!--  botão para google -->
-     <button class="google-btn" type="button" (click)="gmailAuthentication()">
-      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-      SignIn With Google 
-    
+    <!--  botão para google -->
+    <button
+      class="google-btn"
+      type="button"
+      (click)="gmailAuthentication()"
+      [disabled]="this.signInForms.invalid && this.signInForms.touched"
+    >
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+      SignIn With Google
     </button>
-
   </form>
 </div>

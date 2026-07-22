@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'app-avatar',
@@ -9,6 +10,7 @@ import { Component } from '@angular/core';
 export class Avatar {
   localNome: string = 'Tony';
   localImage!:string;
+  localUser!: User;
 
 
   logout() {
