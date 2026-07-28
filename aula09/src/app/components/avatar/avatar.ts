@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { User } from 'firebase/auth';
+import { AuthStateService } from '../../service/auth-state';
 
 @Component({
   selector: 'app-avatar',
@@ -8,13 +9,14 @@ import { User } from 'firebase/auth';
   styleUrl: './avatar.css',
 })
 export class Avatar {
-  localNome: string = 'Tony';
-  localImage!:string;
-  localUser!: User;
+  // localNome: string = 'Tony';
+  // localImage!:string;
+  localUserComponentFilho = input<User>();
+ private localService = inject(AuthStateService);
 
+  ///@Input("nome da variavel") e @OutPut("nome do metodo ou propriedade")
 
   logout() {
-    // throw new Error('Method not implemented.');
-    console.log('deslogou');
+   this.localService.logout();
   }
 }

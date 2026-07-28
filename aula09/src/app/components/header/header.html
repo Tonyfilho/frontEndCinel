@@ -4,9 +4,12 @@
       <a routerLink="/welcome">Welcome</a>
       <a routerLink="/assync-table">Assync Tables</a>
       <a routerLink="/forms">Forms</a>
+      <a routerLink="/weather">Weather Channel </a>
     </div>
     <!-- nossa tag avatar -->
-     <app-avatar></app-avatar>
-
+    @if (this.localUser$ | async; as userComponentPai) {
+      <!-- O Input é a forma que uma component PAI tem de passar dados para componente filho -->
+      <app-avatar [localUserComponentFilho]="userComponentPai"></app-avatar>
+    }
   </nav>
 </header>
