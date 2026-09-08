@@ -1,1 +1,75 @@
-<p>weather works!</p>
+<div class="header">
+  <h2>Weather Channel</h2>
+</div>
+
+@if (this.localWeatherSig()) {
+  <div class="weather-wrapper">
+  <form class="city-form" [formGroup]="formsWeather" (ngSubmit)="submit()">
+    <input type="text" placeholder="Digite a cidade" formControlName="city" name="city" id="city" />
+    <button type="submit" [disabled]="this.formsWeather.invalid"
+      [ngClass]="{'invalid-button': this.formsWeather.invalid && this.formsWeather.touched}">Buscar</button>
+  </form>
+    <!-- bloco de validação -->
+    <div class="validators">
+      @if (!this.formsWeather.valid && this.formsWeather.touched) {
+        <section
+          [ngClass]="{
+            'error-message':
+              this.formsWeather.controls['city'].invalid && this.formsWeather.get('city')?.touched,
+          }"
+        >
+          @if (this.formsWeather.hasError('required', 'city')) {
+            <small class="warning">
+              <p>{{ 'field is mandatory ' }}</p>
+            </small>
+          }
+
+          @if (this.formsWeather.get('city')?.getError('pattern')) {
+            <small class="warning">
+              <p>{{ 'just letter, not allowed special characters or numbers ' }}</p>
+            </small>
+          }
+        </section>
+      }
+    </div>
+
+    <!-- bloco de dados -->
+  <div class="weather-card">
+    <h3>{{this.localWeatherSig()?.location?.name }}, {{this.localWeatherSig()?.location?.country}}</h3>
+    <p class="datetime">{{this.localWeatherSig()?.location?.localtime}}</p>
+ 
+    <div class="main-info">
+      <div class="temperature">{{this.localWeatherSig()?.current?.temp_c}}°C</div>
+      <div class="icon">
+        <img src={{this.localWeatherSig()?.current?.condition?.icon}} alt="Cloudy" />
+        <p>{{this.localWeatherSig()?.current?.condition?.text}}</p>
+      </div>
+    </div>
+ 
+    <div class="details">
+      <div class="detail-box">
+        <p>Sensação térmica</p>
+        <strong>{{this.localWeatherSig()?.current?.feelslike_c}}°C</strong>
+      </div>
+      <div class="detail-box">
+        <p>Umidade</p>
+        <strong>{{this.localWeatherSig()?.current?.humidity}}</strong>
+      </div>
+      <div class="detail-box">
+        <p>Vento</p>
+        <strong>{{this.localWeatherSig()?.current?.wind_kph}} km/h</strong>
+      </div>
+      <div class="detail-box">
+        <p>Pressão</p>
+        <strong>{{this.localWeatherSig()?.current?.pressure_mb}} mb</strong>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+} @else {
+  <div class="weather-wrapper">
+    <h2>Weather Api Waiting...</h2>
+    <h2>Opss something wrong, try more later</h2>
+  </div>
+}
